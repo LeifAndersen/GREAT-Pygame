@@ -65,16 +65,16 @@ while keep_playing:
     for bodypart in snake:
         if head.colliderect(bodypart):
             direction = -1
-            print "Die on body!!!"
+            print("Die on body!!!")
             keep_playing = False
-    
+
     snake.append( head )
 
 #check for wall collision
     if head.top < 0 or head.bottom > height or head.left < 0 or head.right > width:
         direction = -1
         keep_playing = False
-        print "Die!!"
+        print("Die!!")
 
 #check for apple collision
     if head.colliderect( apple ):
@@ -95,7 +95,7 @@ while keep_playing:
     #draw the apple
     pygame.draw.rect(screen,red,apple)
 
-    screen.blit(font.render("lives: " + str(balls),True,white),display_rect)
+    #screen.blit(font.render("lives: " + str(balls),True,white),display_rect)
     #tell the screen to update
     pygame.display.flip()
     #use the clock to limit the game to 40 frames/sec
