@@ -131,7 +131,6 @@ def update():
         velocity = Vector(0, 0)
         acceleration = Vector(0, 0)
         if jump:
-            print "Here"
             velocity.y = -1
             position += velocity
         else:
