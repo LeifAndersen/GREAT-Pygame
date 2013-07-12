@@ -34,6 +34,20 @@ pygame.mixer.music.play(0)
 explosion = pygame.mixer.Sound("explosion1.wav")
 pew = pygame.mixer.Sound("pew1.wav")
 
+def restart_game():
+    global enemies, enemyVelocities
+    enemies = [enemySprite.get_rect() for i in range(100)]
+    enemyVelocities = [1 for enemy in enemies]
+    x = 0
+    y = 10
+    for enemy in enemies:
+        enemy.x = x
+        enemy.y = y
+        x += 50
+        if x > 650:
+            x = 0
+            y += 40
+
 def end_game():
     pygame.quit()
     sys.exit()
@@ -151,7 +165,7 @@ def move():
                     pass
     # Check to see if won
     if len(enemies) == 0:
-        end_game()
+        restart_game()
 
 def main():
     init()
