@@ -6,6 +6,11 @@ import pygame, sys, math
 pygame.init()
 pygame.mixer.init()
 
+# Music
+pygame.mixer.music.load("music.mp3")
+pygame.mixer.music.play(0)
+jumpSound = pygame.mixer.Sound("jump.wav")
+
 class Vector:
     def __init__(self, x=0, y=0):
         self.x = x
@@ -100,6 +105,7 @@ def events():
             if event.key == pygame.K_ESCAPE:
                 end_game()
             if event.key == pygame.K_SPACE:
+                jumpSound.play()
                 jump = True
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
@@ -137,6 +143,9 @@ def update():
         else:
             velocity.y = terminal_velocity
         position += velocity
+
+    # Set Sonic to the new position
+    position.set_rect(sonic)
 
     # Character Movements
     if move_up:
