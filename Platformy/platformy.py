@@ -2,6 +2,8 @@
 import pygame
 from pygame import *
 
+
+
 widthy = 800
 heighty = 640
 dead = False
@@ -14,6 +16,8 @@ def main():
     global cameraX, cameraY, screen, dead
     pygame.init()
     screen = pygame.display.set_mode(DISPLAY)
+
+    timer = pygame.time.Clock()
 
     up = down = left = right = running = False
     bg = Surface((32,32))
@@ -71,6 +75,7 @@ def main():
     entities.add(player)
 
     while True:
+        timer.tick(60)
 
         for e in pygame.event.get():
             if e.type == pygame.QUIT: 
