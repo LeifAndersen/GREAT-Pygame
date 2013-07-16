@@ -71,7 +71,7 @@ def main():
 
     total_level_width  = len(level[0])*32
     total_level_height = len(level)*32
-    camera = Camera(complex_camera, total_level_width, total_level_height)
+    camera = Camera(simple_camera, total_level_width, total_level_height)
     entities.add(player)
 
     while True:
@@ -139,10 +139,15 @@ class Camera(object):
 
 #We just take the position of our target, and add half total screen size.
 def simple_camera(camera, target_rect):
+    l, t, _, _ = target_rect
+    _, _, w, h = camera
     return Rect(-l+half_widthy, -t+half_heighty, w, h)
 
-#functions to ensure we don't scroll outside out level.
+#functions to ensure we don't scroll outside of level.
 def complex_camera(camera, target_rect):
+    l, t, _, _ = target_rect
+    _, _, w, h = camera
+    l, t, _, _ = -l+half_widthy, -t+half_heighty, w, h
     l = min(0, l)                        # stop scrolling at the left edge
     l = max(-(camera.width-widthy), l)   # stop scrolling at the right edge
     t = max(-(camera.height-heighty), t) # stop scrolling at the bottom
