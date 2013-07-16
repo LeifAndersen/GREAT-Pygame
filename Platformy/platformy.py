@@ -120,31 +120,33 @@ def main():
 
         pygame.display.update()
 
+
+
+#This is the class that controls where the scrolling stops for the player
 class Camera(object):
     def __init__(self, camera_func, widthy, heighty):
         self.camera_func = camera_func
+        #the width and height of the level, we want to stop scrolling at the edges of the level
         self.state = Rect(0, 0, widthy, heighty)
 
+    #Method to re-calculate the position on the screen to apply the scrolling
     def apply(self, target):
         return target.rect.move(self.state.topleft)
 
+    #Update camera position once per loop
     def update(self, target):
         self.state = self.camera_func(self.state, target.rect)
 
+#We just take the position of our target, and add half total screen size.
 def simple_camera(camera, target_rect):
-    l, t, _, _ = target_rect
-    _, _, w, h = camera
     return Rect(-l+half_widthy, -t+half_heighty, w, h)
 
+#functions to ensure we don't scroll outside out level.
 def complex_camera(camera, target_rect):
-    l, t, _, _ = target_rect
-    _, _, w, h = camera
-    l, t, _, _ = -l+half_widthy, -t+half_heighty, w, h
-
-    l = min(0, l)                           # stop scrolling at the left edge
+    l = min(0, l)                        # stop scrolling at the left edge
     l = max(-(camera.width-widthy), l)   # stop scrolling at the right edge
     t = max(-(camera.height-heighty), t) # stop scrolling at the bottom
-    t = min(0, t)                           # stop scrolling at the top
+    t = min(0, t)                        # stop scrolling at the top
     return Rect(l, t, w, h)
 
 class Entity(pygame.sprite.Sprite):
@@ -198,11 +200,6 @@ class Player(Entity):
                 if isinstance(p, ExitBlock):
                     pygame.quit()
                     sys.exit()
-                    #screen.fill((0,0,0))
-                    #over=pygame.font.SysFont("times",40)
-                    #text5=over.render("YOU WIN!!!",True,(0,255,0))
-                    #screen.blit(text5,(50,50))
-                    #pygame.display.flip()
                 if xvel > 0:
                     self.rect.right = p.rect.left
                     print "collide right"
