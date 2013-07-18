@@ -15,7 +15,7 @@ ballMask = pygame.mask.from_surface( ball )
 #Load a explosionRect
 batMaster = pygame.image.load("bat.png")
 
-pygame.key.set_repeat(10, 10) #delay before first repeat in ms and then how often in ms 
+pygame.key.set_repeat(10, 10) #delay before first repeat in ms and then how often in ms
 
 # how far the bat is rotated
 degrees = 0
@@ -38,10 +38,10 @@ while 1:
             if event.key == pygame.K_SPACE:
                 degrees += 5
 
-    #When an object rotates, you need to remake its rect and mask each frame                
+    #When an object rotates, you need to remake its rect and mask each frame
     bat = pygame.transform.rotate( batMaster, degrees )
     batRect = bat.get_rect()
-    #center the bat. 
+    #center the bat.
     batRect.center = (width/2, height/2)
 
     #A more complicated version that spins around the end of the bat
@@ -49,14 +49,14 @@ while 1:
     origbatRect = batMaster.get_rect()#this would be done once but I am keeping it together
     batRect.center = (width/2 + (origbatRect.width/2)* math.cos( math.radians( degrees )),
                       height/2 - (origbatRect.width/2)* math.sin( math.radians( degrees )))
-     
+
     #make the mask
     batMask = pygame.mask.from_surface( bat )
-    
+
     # check for overlap with the masks offset by their relative positions
     if batMask.overlap( ballMask, ( ballRect.left - batRect.left, ballRect.top - batRect.top )):
-        print "hit!"
-        
+        print("hit!")
+
     screen.fill(black)
     screen.blit(ball, ballRect)
     screen.blit(bat, batRect)

@@ -79,7 +79,7 @@ def main():
         timer.tick(60)
 
         for e in pygame.event.get():
-            if e.type == pygame.QUIT: 
+            if e.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if e.type == KEYDOWN and e.key == K_ESCAPE:
@@ -208,10 +208,10 @@ class Player(Entity):
                     sys.exit()
                 if xvel > 0:
                     self.rect.right = p.rect.left
-                    print "collide right"
+                    print("collide right")
                 if xvel < 0:
                     self.rect.left = p.rect.right
-                    print "collide left"
+                    print("collide left")
                 if yvel > 0:
                     self.rect.bottom = p.rect.top
                     self.onGround = True
